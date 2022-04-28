@@ -1,3 +1,4 @@
+import 'package:app/feature/both_player.dart';
 import 'package:app/feature/video_fullscreen.dart';
 import 'package:app/main.dart';
 import 'package:flutter/material.dart';
@@ -51,5 +52,5 @@ class _landscapePlayerWidgetState extends State<landscapePlayerWidget> {
 
   @override
   Widget build(BuildContext context) =>
-      VideoPlayerFullscreenWidget(controller: controller);
+      Scaffold(body: VideoPlayerBothWidget(controller: controller));
 }
