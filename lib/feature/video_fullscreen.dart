@@ -12,7 +12,7 @@ class VideoPlayerFullscreenWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) =>
-      widget.controller != null && widget.controller.value.initialized
+      controller != null && controller.value.initialized
           ? Container(alignment: Alignment.topCenter, child: buildVideo())
           : Center(child: CircularProgressIndicator());
 
@@ -24,7 +24,7 @@ class VideoPlayerFullscreenWidget extends StatelessWidget {
             buildVideoPlayer(),
             Positioned.fill(
               child: AdvancedOverlayWidget(
-                controller: widget.controller,
+                controller: controller,
                 onClickedFullScreen: () {
                   if (isPortrait) {
                     AutoOrientation.landscapeRightMode();
@@ -40,8 +40,8 @@ class VideoPlayerFullscreenWidget extends StatelessWidget {
 
   Widget buildVideoPlayer() {
     final video = AspectRatio(
-      aspectRatio: widget.controller.value.aspectRatio,
-      child: VideoPlayer(widget.controller),
+      aspectRatio: controller.value.aspectRatio,
+      child: VideoPlayer(controller),
     );
 
     return buildFullScreen(child: video);

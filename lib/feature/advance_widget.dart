@@ -9,6 +9,15 @@ class AdvancedOverlayWidget extends StatelessWidget {
       {Key key, @required this.controller, this.onClickedFullScreen})
       : super(key: key);
 
+  String getPosition() {
+    final duration = Duration(
+        milliseconds: controller.value.position.inMilliseconds.round());
+
+    return [duration.inMinutes, duration.inSeconds]
+        .map((seg) => seg.remainder(60).toString().padLeft(2, '0'))
+        .join(':');
+  }
+
   @override
   Widget build(BuildContext context) => GestureDetector(
         behavior: HitTestBehavior.opaque,
@@ -17,8 +26,42 @@ class AdvancedOverlayWidget extends StatelessWidget {
         child: Stack(
           children: <Widget>[
             buildPlay(),
-            Positioned(bottom: 0, left: 0, child: null),
+            Positioned(left: 8, bottom: 28, child: Text(getPosition())),
+            Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: Row(
+                  children: [
+                    Expanded(child: buildIndicator()),
+                    const SizedBox(width: 12),
+                    GestureDetector(
+                      child: Icon(Icons.fullscreen),
+                    ),
+                  ],
+                )),
           ],
         ),
       );
+
+  Widget buildPlay() => controller.value.isPlaying
+      ? Container()
+      : Container(
+          color: Colors.black26,
+          child: Center(
+            child: Icon(
+              Icons.play_arrow,
+              color: Colors.white,
+              size: 70,
+            ),
+          ),
+        );
+
+  Widget buildIndicator() => controller.value.isLooping
+      ? Container()
+      : Container(
+          child: Center(
+            child: Icon(Icons.access_alarm),
+          ),
+        );
 }
