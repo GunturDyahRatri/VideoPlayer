@@ -1,5 +1,3 @@
-import 'dart:js';
-
 import 'package:app/feature/advance_widget.dart';
 import 'package:auto_orientation/auto_orientation.dart';
 import 'package:flutter/material.dart';

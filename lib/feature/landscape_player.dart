@@ -1,19 +1,19 @@
 import 'package:app/feature/both_player.dart';
-import 'package:app/feature/video_fullscreen.dart';
+// import 'package:app/feature/video_fullscreen.dart';
 import 'package:app/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:video_player/video_player.dart';
 import 'package:wakelock/wakelock.dart';
 
-class landscapePlayerWidget extends StatefulWidget {
-  const landscapePlayerWidget({Key key}) : super(key: key);
+class LandscapePlayerPage extends StatefulWidget {
+  const LandscapePlayerPage({Key key}) : super(key: key);
 
   @override
-  State<landscapePlayerWidget> createState() => _landscapePlayerWidgetState();
+  State<LandscapePlayerPage> createState() => _LandscapePlayerPageState();
 }
 
-class _landscapePlayerWidgetState extends State<landscapePlayerWidget> {
+class _LandscapePlayerPageState extends State<LandscapePlayerPage> {
   VideoPlayerController controller;
 
   @override
@@ -51,6 +51,7 @@ class _landscapePlayerWidgetState extends State<landscapePlayerWidget> {
   }
 
   @override
-  Widget build(BuildContext context) =>
-      Scaffold(body: VideoPlayerBothWidget(controller: controller));
+  Widget build(BuildContext context) => Scaffold(
+        body: VideoPlayerBothWidget(controller: controller),
+      );
 }

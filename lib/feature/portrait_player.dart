@@ -4,24 +4,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:video_player/video_player.dart';
 
-class ProtraitPlayerWidget extends StatefulWidget {
-  const ProtraitPlayerWidget({Key key}) : super(key: key);
+class PortraitPlayerWidget extends StatefulWidget {
+  const PortraitPlayerWidget({Key key}) : super(key: key);
 
   @override
-  State<ProtraitPlayerWidget> createState() => _ProtraitPlayerWidgetState();
+  State<PortraitPlayerWidget> createState() => _PortraitPlayerWidgetState();
 }
 
-class _ProtraitPlayerWidgetState extends State<ProtraitPlayerWidget> {
+class _PortraitPlayerWidgetState extends State<PortraitPlayerWidget> {
   VideoPlayerController controller;
 
   @override
   void initState() {
     super.initState();
 
-    controller = VideoPlayerController.network(urlPortraitVideo);
-    controller.addListener(() => setState(() {}));
-    controller.setLooping(true);
-    controller.initialize().then((_) => controller.play());
+    controller = VideoPlayerController.network(urlPortraitVideo)
+      ..addListener(() => setState(() {}))
+      ..setLooping(true)
+      ..initialize().then((_) => controller.play());
 
     // setLandscape();
   }
@@ -32,10 +32,10 @@ class _ProtraitPlayerWidgetState extends State<ProtraitPlayerWidget> {
     super.dispose();
   }
 
-  // Future setLandscape() async {
-  //   await SystemChrome.setPreferredOrientations(
-  //       [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
-  // }
+  Future setLandscape() async {
+    await SystemChrome.setPreferredOrientations(
+        [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
+  }
 
   @override
   Widget build(BuildContext context) =>

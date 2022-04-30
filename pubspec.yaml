@@ -30,6 +30,7 @@ dependencies:
   native_device_orientation: ^0.4.3
   video_player: 1.0.1
   wakelock: ^0.0.1
+  youtube_player_flutter: ^7.0.0+7
 
 dev_dependencies:
   flutter_test:
