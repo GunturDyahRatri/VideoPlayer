@@ -1,10 +1,15 @@
 // st
+import 'dart:js';
+
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
 class AdvancedOverlayWidget extends StatelessWidget {
   final VideoPlayerController controller;
   final VoidCallback onClickedFullScreen;
+
+  static const allSpeeds = <double>[0.25, 0.5, 1, 1.25, 1.5, 2, 3, 5, 10];
+
   const AdvancedOverlayWidget(
       {Key key, @required this.controller, this.onClickedFullScreen})
       : super(key: key);
@@ -26,7 +31,14 @@ class AdvancedOverlayWidget extends StatelessWidget {
         child: Stack(
           children: <Widget>[
             buildPlay(),
-            Positioned(left: 8, bottom: 28, child: Text(getPosition())),
+            buildSpeed(),
+            Positioned(
+              left: 8,
+              bottom: 28,
+              child: Text(
+                getPosition(),
+              ),
+            ),
             Positioned(
                 bottom: 0,
                 left: 0,
@@ -36,7 +48,11 @@ class AdvancedOverlayWidget extends StatelessWidget {
                     Expanded(child: buildIndicator()),
                     const SizedBox(width: 12),
                     GestureDetector(
-                      child: Icon(Icons.fullscreen),
+                      child: Icon(
+                        Icons.fullscreen,
+                        color: Colors.white,
+                        size: 28,
+                      ),
                     ),
                   ],
                 )),
@@ -64,4 +80,23 @@ class AdvancedOverlayWidget extends StatelessWidget {
             child: Icon(Icons.access_alarm),
           ),
         );
+
+  Widget buildSpeed() => Align(
+        alignment: Alignment.topRight,
+        child: PopupMenuButton<double>(
+          initialValue: controller.value.playbackSpeed,
+          tooltip: 'Playback Speed',
+          onSelected: controller.setPlaybackSpeed,
+          itemBuilder: (context) => allSpeeds
+              .map<PopupMenuEntry<double>>((speed) => PopupMenuItem(
+                    value: speed,
+                    child: Text('${speed}x'),
+                  ))
+              .toList(),
+          child: Container(
+              color: Colors.white38,
+              padding: EdgeInsets.symmetric(vertical: 12, horizontal: 12),
+              child: Text('${controller.value.playbackSpeed}x')),
+        ),
+      );
 }
